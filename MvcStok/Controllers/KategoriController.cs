@@ -16,5 +16,32 @@ namespace MvcStok.Controllers
             var degerler=db.TBLKATEGORILER.ToList();
             return View(degerler);
         }
+
+        [HttpGet]
+        public ActionResult YeniKategori()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult YeniKategori(TBLKATEGORILER p1)
+        {
+            db.TBLKATEGORILER.Add(p1);
+            db.SaveChanges();
+            return View();
+        }
+
+        public ActionResult Sil(int id)
+        {
+            var kategori=db.TBLKATEGORILER.Find(id);
+            db.TBLKATEGORILER.Remove(kategori);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult KategoriGetir(int id)
+        {
+            var ktgr = db.TBLKATEGORILER.Find(id);
+            return View("KategoriGetir",ktgr);
+        }
     }
 }
