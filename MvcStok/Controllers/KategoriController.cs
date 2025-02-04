@@ -26,6 +26,10 @@ namespace MvcStok.Controllers
         [HttpPost]
         public ActionResult YeniKategori(TBLKATEGORILER p1)
         {
+            if (!ModelState.IsValid) 
+            {
+                return View("YeniKategori"); 
+            }
             db.TBLKATEGORILER.Add(p1);
             db.SaveChanges();
             return View();
@@ -42,6 +46,13 @@ namespace MvcStok.Controllers
         {
             var ktgr = db.TBLKATEGORILER.Find(id);
             return View("KategoriGetir",ktgr);
+        }
+        public ActionResult Guncelle(TBLKATEGORILER p)
+        {
+            var ktg=db.TBLKATEGORILER.Find(p.KATEGORID);
+            ktg.KATEGORIAD = p.KATEGORIAD;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

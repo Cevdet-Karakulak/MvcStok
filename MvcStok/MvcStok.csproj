@@ -243,6 +243,8 @@
     <Content Include="Views\Musteri\YeniMusteri.cshtml" />
     <Content Include="Views\Ürün\YeniÜrün.cshtml" />
     <Content Include="Views\Kategori\KategoriGetir.cshtml" />
+    <Content Include="Views\Musteri\MusteriGetir.cshtml" />
+    <Content Include="Views\Ürün\UrunGetir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

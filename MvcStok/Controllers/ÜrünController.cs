@@ -44,5 +44,31 @@ namespace MvcStok.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult UrunGetir(int id)
+        {
+            var urn = db.TBLURUNLER.Find(id);
+            List<SelectListItem> degerler = (from i in db.TBLKATEGORILER.ToList()
+                                             select new SelectListItem
+                                             {
+                                                 Text = i.KATEGORIAD,
+                                                 Value = i.KATEGORID.ToString()
+                                             }).ToList();
+            ViewBag.dgr = degerler;
+           return View("UrunGetir",urn);
+
+        }
+        public ActionResult Guncelle(TBLURUNLER p)
+        {
+            var urn = db.TBLURUNLER.Find(p.URUNID);
+            urn.URUNAD = p.URUNAD;
+            urn.MARKA = p.MARKA;
+            urn.STOK = p.STOK;
+            urn.FIYAT = p.FIYAT;
+            var ktg = db.TBLKATEGORILER.Where(m => m.KATEGORID
+           == p.TBLKATEGORILER.KATEGORID).FirstOrDefault();
+            urn.URUNKATEGORI = ktg.KATEGORID;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
